@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Reflection; // usado para o metodo DictPath na classe DictIO
@@ -39,7 +39,7 @@ class Program
                    
                     List<string> cadastro = UserScreen.RegistryScreen(); //chamando metodo de cadastro, que retorna uma lista contendo palavra[0] e dica[1]
                     Words.AddWord(cadastro[0], cadastro[1]); // método addword adiciona entrada ao dicionario (base de dados dentro do programa)
-                               
+                           
                     dictIOManager.DictIOWriter(); // método para escrever dados do dict no arquivo de base de dados                              
                     
                 }
@@ -776,3 +776,4 @@ class Program
 
 //TODO: MÉTODO PARA REMOVER ENTRADAS INDESEJADAS DO DICIONARIO / VISUALIZAR PALAVRAS NO DICIONARIO
 
+//teste upload github repo 190923

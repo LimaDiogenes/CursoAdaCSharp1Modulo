@@ -1,0 +1,158 @@
+
+using System.Collections.Generic;
+using System;
+class Program
+{
+    static void Main()
+    {
+        UserScreen telaUsuario = new UserScreen();
+        while(true) //mantem programa rodando indefinidamente
+        {
+            try 
+            {
+                char input1 = UserScreen.InitialScreen(); //chama tela inicial, retorna o input do usuario
+
+                if (input1 == '1')
+                {
+                    Console.Clear();
+                    Console.WriteLine("Placeholder if 1");
+                    Console.ReadLine();
+                }
+                else if (input1 == '2')
+                {
+                    Console.Clear();
+                    Console.WriteLine("DIGITE CATEGORIA (DICA) DA PALAVRA: ");
+                    string dica = Console.ReadLine().ToUpper();
+                    if (dica == "")
+                    {
+                        throw new ArgumentNullException();
+                    }
+                    Console.WriteLine("DIGITE 1 PALAVRA PARA ADICIONAR AO JOGO: ");
+                    string palavra = Console.ReadLine().ToUpper();
+                    if (palavra == "")
+                    {
+                        throw new ArgumentNullException();
+                    }
+                    telaUsuario.AddWord(palavra, dica);
+                    
+                    
+                }
+                else
+                {
+                    throw new FormatException();
+                }
+                
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Opção inválida! Digite uma das opções disponíveis!");
+                Console.WriteLine("Aperte qualquer tecla para voltar a tela inicial.");
+                Console.ReadKey();
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("Digitação obrigatória!");
+                Console.WriteLine("Aperte qualquer tecla para voltar a tela inicial.");
+                Console.ReadKey();
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Palavra já cadastrada!");
+                Console.WriteLine("Aperte qualquer tecla para voltar a tela inicial.");
+                Console.ReadKey();
+            }
+            
+        }
+    }
+
+    class UserScreen // classe da tela do usuário / tela do programa
+    {     
+
+          public Dictionary<string, string> palavras = new Dictionary<string, string>();
+          
+
+          public UserScreen() //inicializa a classe da tela de usuário
+          {
+            AddWord("BANANA", "FRUTA");
+            AddWord("MORANGO", "FRUTA");
+            AddWord("JABUTICABA", "FRUTA");
+            AddWord("CURITIBA", "CIDADE");
+            AddWord("ANAPOLIS", "CIDADE");
+            AddWord("CANOAS", "CIDADE");
+          }
+        
+          public static char InitialScreen() //cria tela inicial
+          {
+           
+            UserScreen tela1 = new UserScreen();
+
+            Console.Clear(); //limpa a tela do console para poder usar o posicionamento X e Y logo abaixo
+            // Console.WriteLine("\n _____________________________________________________");
+            // Console.WriteLine("|                  JOGO DA FORCA                      |");
+            // Console.WriteLine("|                                                     |");            
+            // Console.WriteLine("|              Escolha a opção desejada:              |");
+            // Console.WriteLine("|                                                     |"); 
+            // Console.WriteLine("|                 [1] Jogar agora                     |"); 
+            // Console.WriteLine("|                 [2] Cadastrar palavra               |");
+            // Console.WriteLine("|                                                     |"); 
+            // Console.WriteLine("|                    »»»[ ]«««                        |");
+            // Console.WriteLine("|_____________________________________________________|");
+            // Console.SetCursorPosition(25, 9); //posicionamento do cursor para input
+            // char optionCourse = char.ToUpper(Console.ReadKey().KeyChar); //variavel com a selecao do usuario. ReadKey e KeyChar aqui servem para receber a primeira tecla do input do usuario
+            tela1.CenterText("", starter:'╔', sep:'═', ends:'╗');
+            tela1.CenterText(line2);
+            tela1.CenterText(line1);
+            tela1.CenterText("TEXTO");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText(""); 
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("");
+            tela1.CenterText("[ ]"); 
+            tela1.CenterText("", starter:'╚', sep:'═', ends:'╝');
+            char userOption = char.ToUpper(Console.ReadKey().KeyChar); //variavel com a selecao do usuario. ReadKey e KeyChar aqui servem para receber a primeira tecla do input do usuario
+            tela1.CenterText("", starter:'╚', sep:'═', ends:'╝');
+
+            return userOption;
+          }
+
+          public void AddWord(string chave, string valor)
+          {
+            Console.Clear();
+            palavras.Add(chave, valor); //.Add gera uma ArgumentException caso chave já exista no dicionario
+            // Console.WriteLine("Palavra cadastrada com sucesso!");
+            // Console.WriteLine("Aperte qualquer tecla para voltar a tela inicial.");
+            // Console.ReadKey();
+          }
+          
+          public string ReturnWord()
+          {
+            string retorno = $"este é um retorno {palavras}";
+           
+            return retorno;
+          }
+
+          public void CenterText(string text = "", char starter = '║', char ends = '║', char sep = ' ', int width = 100) // cria um texto centralizado, aceitando como argumentos "end = primeiro e ultimo caractere da linha", "sep = caracter para usar como separador, que aparecerá antes e depois do texto até o tamanho da tela", "width = largura" todos os parâmetros são opcionais
+            {   
+                int padWidth = (width - text.Length) / 2; // encontra a metada da largura, excluindo o tamanho do texto criado
+                string paddedText = text.PadLeft(text.Length + padWidth, sep).PadRight(width, sep); // PadLeft e PadRight criam caracteres de preenchimento "sep" em ambos os lados do texto, deixando centralizado na tela  
+                Console.WriteLine("  " + starter + paddedText + ends + "  "); // cria o texto centralizado na tela usando os "ends" como margem
+
+                                
+            }
+    
+    }
+}
+
+

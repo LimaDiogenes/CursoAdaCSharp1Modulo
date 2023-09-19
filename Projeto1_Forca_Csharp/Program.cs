@@ -1,4 +1,4 @@
-﻿﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Reflection; // usado para o metodo DictPath na classe DictIO
@@ -775,3 +775,4 @@ class Program
 }
 
 //TODO: MÉTODO PARA REMOVER ENTRADAS INDESEJADAS DO DICIONARIO / VISUALIZAR PALAVRAS NO DICIONARIO
+
